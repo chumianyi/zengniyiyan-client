@@ -213,9 +213,12 @@ class _HomeScreenState extends State<HomeScreen>
                 physics: const ClampingScrollPhysics(),
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  layoutBuilder: (children) => Stack(
+                  layoutBuilder: (currentChild, previousChildren) => Stack(
                     alignment: Alignment.topCenter,
-                    children: children,
+                    children: <Widget>[
+                      ...previousChildren,
+                      if (currentChild != null) currentChild,
+                    ],
                   ),
                   transitionBuilder: (child, animation) => FadeTransition(
                     opacity: animation,
